@@ -41,5 +41,8 @@
                 program="org.efaps.esjp.admin.datamodel.StatusValue">
             </trigger>
         </attribute>
+        <trigger program="org.efaps.esjp.admin.access.SimpleAccessCheckOnType"
+            name="ImEx_Import.ACCESSCHECK"
+            event="ACCESSCHECK" />
     </definition>
 </datamodel-type>
