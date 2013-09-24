@@ -28,6 +28,11 @@
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_ImportMyDesk</name>
+        <access>
+            <role>ImEx_Admin</role>
+            <role>ImEx_Modifier</role>
+            <role>ImEx_Reader</role>
+        </access>
         <target>
             <menu>ImEx_ImportMyDesk_Menu</menu>
             <table>ImEx_ImportTable</table>

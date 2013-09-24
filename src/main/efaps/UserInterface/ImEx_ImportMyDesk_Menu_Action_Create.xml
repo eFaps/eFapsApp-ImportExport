@@ -35,7 +35,10 @@
         <!-- target definitions -->
         <target>
             <form>ImEx_ImportForm</form>
-            <execute method="create" program="org.efaps.esjp.imex.Import" />
+            <execute method="create" program="org.efaps.esjp.imex.Import" >
+                <property name="StatusGroup">ImEx_ImportStatus</property>
+                <property name="Status">Open</property>
+            </execute>
         </target>
 
         <!-- properties -->
