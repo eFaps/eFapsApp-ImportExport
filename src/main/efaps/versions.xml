@@ -90,7 +90,7 @@
             
             UIUpdate update = new UIUpdate();
             <!-- connect the ImEx_MyDesk Menu to the main menu from efaps -->
-            update.add2Menu("6650e825-aa71-45ea-bc2d-20972a38ab05", "87001cc3-c45c-44de-b8f1-776df507f268", -1);
+            update.add2Menu("6650e825-aa71-45ea-bc2d-20972a38ab05", "87001cc3-c45c-44de-b8f1-776df507f268", 2);
             
             
         </script>
