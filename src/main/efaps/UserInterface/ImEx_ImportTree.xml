@@ -28,14 +28,14 @@
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_ImportTree</name>
-        <!-- targets -->
         <target>
             <menu>ImEx_ImportTree_Menu</menu>
             <form>ImEx_ImportForm</form>
         </target>
-        <!-- type tree for -->
         <type>ImEx_Import</type>
-        <!-- properties -->
+        <childs>
+            <child>ImEx_ImportTree_Documents</child>
+        </childs>
         <property name="Target">content</property>
         <property name="TargetMode">view</property>
     </definition>
