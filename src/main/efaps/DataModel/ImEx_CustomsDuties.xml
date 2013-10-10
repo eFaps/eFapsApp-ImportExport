@@ -15,22 +15,17 @@
  limitations under the License.
 
  Author:          The eFaps Team
- Revision:        $Rev$
- Last Changed:    $Date$
- Last Changed By: $Author$
+ Revision:        $Rev: 10285 $
+ Last Changed:    $Date: 2013-09-24 15:57:52 -0500 (mar, 24 sep 2013) $
+ Last Changed By: $Author: jan@moxter.net $
 
--->
-<ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>6650e825-aa71-45ea-bc2d-20972a38ab05</uuid>
+--><datamodel-type xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+    <uuid>61f42cac-32dd-4591-bb2c-7fac5ef4214a</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
-    <file-revision>$Rev$</file-revision>
+    <file-revision>$Rev: 10285 $</file-revision>
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_MyDesk</name>
-        <childs>
-            <child>ImEx_ImportMyDesk</child>
-            <child>ImEx_CustomsDutiesMyDesk</child>
-        </childs>
+        <name>ImEx_CustomsDuties</name>
+        <parent>ImEx_CustomsDutiesAbstract</parent>
     </definition>
-</ui-menu>
+</datamodel-type>

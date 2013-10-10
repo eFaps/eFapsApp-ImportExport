@@ -15,22 +15,20 @@
  limitations under the License.
 
  Author:          The eFaps Team
- Revision:        $Rev$
- Last Changed:    $Date$
- Last Changed By: $Author$
+ Revision:        $Rev: 10305 $
+ Last Changed:    $Date: 2013-09-24 17:36:44 -0500 (mar, 24 sep 2013) $
+ Last Changed By: $Author: jan@moxter.net $
 
--->
-<ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>6650e825-aa71-45ea-bc2d-20972a38ab05</uuid>
+--><ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+    <uuid>d3161e4c-bc73-4c82-b60c-61599f623a3e</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
-    <file-revision>$Rev$</file-revision>
+    <file-revision>$Rev: 10305 $</file-revision>
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_MyDesk</name>
+        <name>ImEx_CustomsDutiesTree_Menu_Action</name>
+        <!-- childs -->
         <childs>
-            <child>ImEx_ImportMyDesk</child>
-            <child>ImEx_CustomsDutiesMyDesk</child>
+            <child>ImEx_CustomsDutiesTree_Menu_Action_Edit</child>
         </childs>
     </definition>
 </ui-menu>
