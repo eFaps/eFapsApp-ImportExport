@@ -29,12 +29,16 @@
         <!-- fields -->
         <field name="declarationNumber">
             <property name="HRef">TREE</property>
-            <property name="Attribute">DeclarationNumber</property>
-            <property name="Label">ImEx_CustomsDuties/DeclarationNumber.Label</property>
+            <property name="Attribute">Name</property>
+            <property name="Label">ImEx_CustomsDuties/Name.Label</property>
         </field>
         <field name="settlementDate">
-            <property name="Attribute">SettlementDate</property>
-            <property name="Label">ImEx_CustomsDuties/SettlementDate.Label</property>
+            <property name="FilterType">FREETEXT</property>
+            <property name="FilterRequired">TRUE</property>
+            <property name="FilterBase">DATABASE</property>
+            <property name="FilterDefault">MONTH</property>
+            <property name="Attribute">Date</property>
+            <property name="Label">ImEx_CustomsDuties/Date.Label</property>
         </field>
         <field name="aduanasAgency">
             <property name="Attribute">AduanasAgency</property>

@@ -33,7 +33,10 @@
         <!-- target definitions -->
         <target>
             <form>ImEx_CustomsDutiesForm</form>
-            <execute program="org.efaps.esjp.common.uiform.Create" />
+            <execute program="org.efaps.esjp.imex.CustomsDuties" method="create" >
+                <property name="StatusGroup">ImEx_CustomDutiesStatus</property>
+                <property name="Status">Open</property>
+            </execute>
         </target>
 
         <!-- properties -->

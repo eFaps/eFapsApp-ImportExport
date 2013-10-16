@@ -26,6 +26,59 @@
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_CustomsDuties</name>
-        <parent>ImEx_CustomsDutiesAbstract</parent>
+        <parent>Sales_DocumentSumAbstract</parent>
+
+        <attribute>
+            <name>Status</name>
+            <type>Status</type>
+            <typelink>ImEx_CustomDutiesStatus</typelink>
+            <sqltable>ERP_DocumentAbstractSQLTable</sqltable>
+            <sqlcolumn>STATUS</sqlcolumn>
+            <trigger program="org.efaps.esjp.admin.datamodel.StatusValue"
+                name="ImEx_CustomsDuties.Status.RANGE_VALUE" event="RANGE_VALUE">
+            </trigger>
+        </attribute>
+        <attribute>
+            <name>AduanasAgency</name>
+            <type>String</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>ADUANASAGENCY</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>Bank</name>
+            <type>String</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>BANK</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>Principal</name>
+            <type>String</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>PRINCIPAL</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>Storage</name>
+            <type>String</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>STORAGE</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>QuantityPackages</name>
+            <type>Decimal</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>QUANTITYPACKAGES</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>GrossWeight</name>
+            <type>Decimal</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>GROSSWEIGHT</sqlcolumn>
+        </attribute>
+        <attribute>
+            <name>GoodsIssueDate</name>
+            <type>String</type>
+            <sqltable>ImEx_CustomsDutiesExtendSQLTable</sqltable>
+            <sqlcolumn>GOODSISSUEDATE</sqlcolumn>
+        </attribute>
     </definition>
 </datamodel-type>
