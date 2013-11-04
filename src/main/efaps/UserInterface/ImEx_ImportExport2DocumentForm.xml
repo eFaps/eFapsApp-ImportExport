@@ -40,5 +40,13 @@
                 <property name="OrderByOrdinal">true</property>   
              </trigger>
         </field>
+        <field name="numerator">
+            <property name="Attribute">Numerator</property>
+            <property name="ModeEdit">EDITABLE</property>
+        </field>
+        <field name="denominator">
+            <property name="Attribute">Denominator</property>
+            <property name="ModeEdit">EDITABLE</property>
+        </field>
     </definition>
 </ui-form>

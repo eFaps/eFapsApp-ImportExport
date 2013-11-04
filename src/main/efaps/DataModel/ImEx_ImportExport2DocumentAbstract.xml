@@ -46,5 +46,19 @@
             <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
             <sqlcolumn>LINKID</sqlcolumn>
         </attribute>
+        <attribute>
+            <name>Numerator</name>
+            <type>Integer</type>
+            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
+            <sqlcolumn>NUMERATOR</sqlcolumn>
+            <defaultvalue>1</defaultvalue>
+        </attribute>
+        <attribute>
+            <name>Denominator</name>
+            <type>Integer</type>
+            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
+            <sqlcolumn>DENOMINATOR</sqlcolumn>
+            <defaultvalue>1</defaultvalue>
+        </attribute>
     </definition>
 </datamodel-type>
