@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--
+
+  Copyright 2010 moxter.net S.A.C.
+
+  All Rights Reserved.
+? This program contains proprietary and trade secret information of
+? moxter.net S.A.C. Copyright notice is precautionary only and does not
+? evidence any actual or intended publication of such program.
+
+  Author:          moxter.net S.A.C.
+  Revision:        $Rev$
+  Last Changed:    $Date$
+  Last Changed By: $Author$
+
+--><ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+
+    <uuid>8f8e0256-914e-4aa2-800f-5d20e491e635</uuid>
+    <file-application>G y G</file-application>
+    <file-revision>$Rev$</file-revision>
+
+    <definition>
+        <version-expression>(version==latest)</version-expression>
+        <name>ImEx_ImportTree_CostCalculation_Menu</name>
+        <!-- childs -->
+        <childs>
+            <child>ImEx_ImportTree_CostCalculation_Menu_DownloadPdf</child>
+            <child>ImEx_ImportTree_CostCalculation_Menu_DownloadExcel</child>
+        </childs>
+    </definition>
+</ui-menu>

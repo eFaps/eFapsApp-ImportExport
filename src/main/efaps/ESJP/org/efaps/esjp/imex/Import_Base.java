@@ -45,6 +45,12 @@ import org.efaps.util.EFapsException;
 public abstract class Import_Base
 {
 
+    public enum TERM
+    {
+        EXW, FCA, FOB, CFR, CIF, CPT, DDU, DDP;
+    }
+
+
     public Return create(final Parameter _parameter)
         throws EFapsException
     {

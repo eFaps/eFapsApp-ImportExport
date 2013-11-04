@@ -19,32 +19,24 @@
  Last Changed:    $Date$
  Last Changed By: $Author$
 
--->
-<datamodel-type xmlns="http://www.efaps.org/xsd"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>e8c57c94-747f-436f-a5a1-d1b9a29afb44</uuid>
+--><ui-command xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+    <uuid>6e47acc9-be0f-4b62-b30f-7e56d75d9677</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
     <file-revision>$Rev$</file-revision>
-    <specification />
-
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_ImportExport2DocumentAbstract</name>
-        <parent>ImEx_ImportExport2ObjectAbstract</parent>
-        <purpose abstract="true" />
-        <attribute>
-            <name>ToLinkAbstract</name>
-            <type>Link</type>
-            <typelink>ERP_DocumentAbstract</typelink>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>TOID</sqlcolumn>
-        </attribute>
-        <attribute>
-            <name>Term</name>
-            <type>Integer</type>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>LINKID</sqlcolumn>
-        </attribute>
+        <name>ImEx_ImportTree_CostCalculation_Menu_DownloadExcel</name>
+        <icon>Document_Excel</icon>
+        <!-- target definitions -->
+        <target>
+            <execute method="exportReport" program="org.efaps.esjp.imex.CostCalculation">
+                <property name="Mime">xls</property>
+            </execute>
+        </target>
+
+        <!-- properties -->
+        <property name="Target">hidden</property>
+        <property name="TargetShowFile">true</property>
     </definition>
-</datamodel-type>
+
+</ui-command>

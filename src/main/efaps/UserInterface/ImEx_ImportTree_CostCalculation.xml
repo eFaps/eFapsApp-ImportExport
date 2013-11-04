@@ -20,25 +20,21 @@
   Last Changed By: $Author$
 
 -->
-<ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ui-command xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>4b662643-9cb0-4aa3-b924-dff50ddfd1b9</uuid>
+    <uuid>8d7c566e-cf90-4722-80c6-daadffe5ad4a</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
     <file-revision>$Rev$</file-revision>
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_ImportTree</name>
+        <name>ImEx_ImportTree_CostCalculation</name>
+        <!-- target definitions -->
         <target>
-            <menu>ImEx_ImportTree_Menu</menu>
-            <form>ImEx_ImportForm</form>
+            <menu>ImEx_ImportTree_CostCalculation_Menu</menu>
+            <form>ImEx_CostCalculationForm</form>
         </target>
-        <type>ImEx_Import</type>
-        <childs>
-            <child>ImEx_ImportTree_Documents</child>
-            <child>ImEx_ImportTree_File</child>
-            <child>ImEx_ImportTree_CostCalculation</child>
-        </childs>
+        <!-- properties -->
         <property name="Target">content</property>
         <property name="TargetMode">view</property>
     </definition>
-</ui-menu>
+</ui-command>

@@ -33,6 +33,16 @@
             <property name="HRef">TREE</property>
             <property name="Attribute">Type</property>
         </field>
+        <field name="term">
+            <property name="Attribute">Term</property>
+            <property name="ModeEdit">EDITABLE</property>
+            <trigger program="org.efaps.esjp.common.uiform.Field"
+                method="getRadioList4Enum"
+                name="ImEx_ImportExport2DocumentForm.term.UI_FIELD_VALUE"
+                event="UI_FIELD_VALUE">
+                <property name="Enum">org.efaps.esjp.imex.Import_Base$TERM</property>   
+             </trigger>
+        </field>
         <field name="name">
             <property name="SelectAlternateOID">linkto[ToLinkAbstract].oid</property>
             <property name="HRef">TREE</property>

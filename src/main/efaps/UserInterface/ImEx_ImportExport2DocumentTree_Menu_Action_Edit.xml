@@ -20,31 +20,18 @@
  Last Changed By: $Author$
 
 -->
-<datamodel-type xmlns="http://www.efaps.org/xsd"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>e8c57c94-747f-436f-a5a1-d1b9a29afb44</uuid>
+<ui-command xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+    <uuid>1dd304d1-f4a8-4e53-8f9e-a32acf1b17ad</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
     <file-revision>$Rev$</file-revision>
-    <specification />
-
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_ImportExport2DocumentAbstract</name>
-        <parent>ImEx_ImportExport2ObjectAbstract</parent>
-        <purpose abstract="true" />
-        <attribute>
-            <name>ToLinkAbstract</name>
-            <type>Link</type>
-            <typelink>ERP_DocumentAbstract</typelink>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>TOID</sqlcolumn>
-        </attribute>
-        <attribute>
-            <name>Term</name>
-            <type>Integer</type>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>LINKID</sqlcolumn>
-        </attribute>
+        <name>ImEx_ImportExport2DocumentTree_Menu_Action_Edit</name>
+        <target>
+            <form>ImEx_ImportExport2DocumentForm</form>
+            <execute program="org.efaps.esjp.common.uiform.Edit"/>
+        </target>
+        <property name="Target">modal</property>
+        <property name="TargetMode">edit</property>
     </definition>
-</datamodel-type>
+</ui-command>

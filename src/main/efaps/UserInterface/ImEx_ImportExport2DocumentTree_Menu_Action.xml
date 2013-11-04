@@ -20,31 +20,17 @@
  Last Changed By: $Author$
 
 -->
-<datamodel-type xmlns="http://www.efaps.org/xsd"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <uuid>e8c57c94-747f-436f-a5a1-d1b9a29afb44</uuid>
+    <uuid>15f34d38-1d1f-49d4-85f6-5ecdcad7f76e</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
     <file-revision>$Rev$</file-revision>
-    <specification />
-
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>ImEx_ImportExport2DocumentAbstract</name>
-        <parent>ImEx_ImportExport2ObjectAbstract</parent>
-        <purpose abstract="true" />
-        <attribute>
-            <name>ToLinkAbstract</name>
-            <type>Link</type>
-            <typelink>ERP_DocumentAbstract</typelink>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>TOID</sqlcolumn>
-        </attribute>
-        <attribute>
-            <name>Term</name>
-            <type>Integer</type>
-            <sqltable>ImEx_ImportExport2ObjectSQLTable</sqltable>
-            <sqlcolumn>LINKID</sqlcolumn>
-        </attribute>
+        <name>ImEx_ImportExport2DocumentTree_Menu_Action</name>
+        <!-- childs -->
+        <childs>
+            <child>ImEx_ImportExport2DocumentTree_Menu_Action_Edit</child>
+        </childs>
     </definition>
-</datamodel-type>
+</ui-menu>
