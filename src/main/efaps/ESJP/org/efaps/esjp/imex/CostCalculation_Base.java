@@ -47,6 +47,8 @@ import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 
+import org.efaps.admin.datamodel.Dimension;
+import org.efaps.admin.datamodel.Dimension.UoM;
 import org.efaps.admin.dbproperty.DBProperties;
 import org.efaps.admin.event.Parameter;
 import org.efaps.admin.event.Parameter.ParameterValues;
@@ -147,16 +149,25 @@ public abstract class CostCalculation_Base
         final SelectBuilder selProddDesc = SelectBuilder.get().linkto(CISales.PositionSumAbstract.Product)
                         .attribute(CIProducts.ProductAbstract.Description);
         multi.addSelect(selProdInst, selProdName, selProddDesc);
-        multi.addAttribute(CISales.PositionSumAbstract.Quantity);
+        multi.addAttribute(CISales.PositionSumAbstract.Quantity, CISales.PositionSumAbstract.UoM);
         multi.execute();
         while (multi.next()) {
             final Instance prodInst = multi.<Instance>getSelect(selProdInst);
             if (isProduct(_parameter, prodInst)) {
-                if (!map.containsKey(prodInst)) {
+                BigDecimal quantity = multi.<BigDecimal>getAttribute(CISales.PositionSumAbstract.Quantity);
+                final UoM uoM = Dimension.getUoM(multi.<Long>getAttribute(CISales.PositionSumAbstract.UoM));
+                if (!uoM.getDimension().getBaseUoM().equals(uoM)) {
+                    quantity = new BigDecimal(uoM.getNumerator()).setScale(12, BigDecimal.ROUND_HALF_UP)
+                                    .divide(new BigDecimal(uoM.getDenominator()), BigDecimal.ROUND_HALF_UP)
+                                        .multiply(quantity);
+                }
+                if (map.containsKey(prodInst)) {
+                    map.get(prodInst).addQuantity(quantity);
+                } else {
                     final String prodName = multi.<String>getSelect(selProdName);
                     final String desc = multi.<String>getSelect(selProddDesc);
                     final Product prod = new Product(prodInst, prodName + " " + desc);
-                    prod.addQuantity(multi.<BigDecimal>getAttribute(CISales.PositionSumAbstract.Quantity));
+                    prod.addQuantity(quantity);
                     map.put(prodInst, prod);
                 }
             }
@@ -373,9 +384,9 @@ public abstract class CostCalculation_Base
             for (final Product product : this.products) {
                 final BigDecimal productUnitTotal = (BigDecimal) tmpMap.get("product" + i);
                 tmpMap2.put("product" + i,
-                                productUnitTotal.setScale(12, BigDecimal.ROUND_HALF_DOWN)
-                                .divide(product.getQuantity(), BigDecimal.ROUND_HALF_DOWN)
-                                                .setScale(2, BigDecimal.ROUND_HALF_DOWN));
+                                productUnitTotal.setScale(12, BigDecimal.ROUND_HALF_UP)
+                                .divide(product.getQuantity(), BigDecimal.ROUND_HALF_UP)
+                                                .setScale(2, BigDecimal.ROUND_HALF_UP));
                 i++;
             }
             dsList.add(tmpMap2);
@@ -460,9 +471,9 @@ public abstract class CostCalculation_Base
         public BigDecimal getPartial(final BigDecimal _expense,
                                      final BigDecimal _productTotal)
         {
-            BigDecimal ret = _expense.setScale(12, BigDecimal.ROUND_HALF_DOWN)
-                            .divide(_productTotal, BigDecimal.ROUND_HALF_DOWN).multiply(this.cost);
-            ret = ret.setScale(2,  BigDecimal.ROUND_HALF_DOWN);
+            BigDecimal ret = _expense.setScale(12, BigDecimal.ROUND_HALF_UP)
+                            .divide(_productTotal, BigDecimal.ROUND_HALF_UP).multiply(this.cost);
+            ret = ret.setScale(2,  BigDecimal.ROUND_HALF_UP);
             return ret;
 
         }
