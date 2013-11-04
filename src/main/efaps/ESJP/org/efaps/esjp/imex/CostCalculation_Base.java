@@ -36,8 +36,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.base.expression.AbstractSimpleExpression;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.VariableBuilder;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
+import net.sf.dynamicreports.report.builder.style.ConditionalStyleBuilder;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.dynamicreports.report.constant.Calculation;
+import net.sf.dynamicreports.report.definition.ReportParameters;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 
@@ -245,7 +251,7 @@ public abstract class CostCalculation_Base
                     final SelectBuilder selProdInst = SelectBuilder.get().linkto(CISales.PositionSumAbstract.Product)
                                     .instance();
                     multi.addSelect(selProdInst);
-                    multi.addAttribute(CISales.PositionSumAbstract.CrossPrice);
+                    multi.addAttribute(CISales.PositionSumAbstract.NetPrice);
                     multi.execute();
                     final Map<Instance, BigDecimal> costmap = new HashMap<Instance, BigDecimal>();
                     while (multi.next()) {
@@ -253,7 +259,8 @@ public abstract class CostCalculation_Base
                         if (!costmap.containsKey(prodInst)) {
                             costmap.put(prodInst, BigDecimal.ZERO);
                         }
-                        final BigDecimal crossPrice = multi.<BigDecimal>getAttribute(CISales.PositionSumAbstract.CrossPrice);
+                        final BigDecimal crossPrice = multi
+                                        .<BigDecimal>getAttribute(CISales.PositionSumAbstract.NetPrice);
                         costmap.put(prodInst, costmap.get(prodInst).add(crossPrice));
                     }
 
@@ -284,10 +291,11 @@ public abstract class CostCalculation_Base
                         if (!isProduct(_parameter, entry.getKey())) {
                             final Map<String, Object> tmpMap = new HashMap<String, Object>();
                             final PrintQuery print = new PrintQuery(entry.getKey());
-                            print.addAttribute(CIProducts.ProductAbstract.Name);
+                            print.addAttribute(CIProducts.ProductAbstract.Name, CIProducts.ProductAbstract.Description);
                             print.execute();
                             tmpMap.put("expense", entry.getValue());
-                            tmpMap.put("descr", print.getAttribute(CIProducts.ProductAbstract.Name));
+                            tmpMap.put("descr", print.getAttribute(CIProducts.ProductAbstract.Name) + " " +
+                                            print.getAttribute(CIProducts.ProductAbstract.Description));
                             termList.add(tmpMap);
                         }
                     }
@@ -300,18 +308,19 @@ public abstract class CostCalculation_Base
             }
 
 
-            for (final Entry<TERM, List<Map<String,Object>>> entry  : subListMap.entrySet()) {
-                for (final Map<String,Object> map : entry.getValue()) {
+            for (final Entry<TERM, List<Map<String, Object>>> entry : subListMap.entrySet()) {
+                for (final Map<String, Object> map : entry.getValue()) {
                     // is this a product line
                     if (CostCalculation_Base.PRODTEMPKEY.equals(map.get("descr"))) {
                         map.put("descr", getDBProp("ProductValue"));
                     } else {
                         int i = 0;
                         for (final Product product : this.products) {
-                            map.put("product" + i, product.getPartial((BigDecimal) map.get("expense"),  productTotal));
+                            map.put("product" + i, product.getPartial((BigDecimal) map.get("expense"), productTotal));
                             i++;
                         }
                     }
+                    map.put("summary", false);
                     dsList.add(map);
                 }
 
@@ -319,13 +328,13 @@ public abstract class CostCalculation_Base
                 final Map<String, Object> tmpMap = new HashMap<String, Object>();
                 tmpMap.put("expense", BigDecimal.ZERO);
                 tmpMap.put("descr", entry.getKey().toString());
-                tmpMap.put("summarize", false);
+                tmpMap.put("summary", true);
                 for (int i = 0; i < this.products.size(); i++) {
                     tmpMap.put("product" + i, BigDecimal.ZERO);
                 }
 
                 for (final Map<String, ?> map : dsList) {
-                    if (!map.containsKey("summarize")) {
+                    if (!(Boolean) map.get("summary")) {
                         tmpMap.put("expense", ((BigDecimal) tmpMap.get("expense")).add((BigDecimal) map.get("expense")));
                         for (int i = 0; i < this.products.size(); i++) {
                             tmpMap.put("product" + i, ((BigDecimal) tmpMap.get("product" + i)).add((BigDecimal) map
@@ -340,12 +349,12 @@ public abstract class CostCalculation_Base
             final Map<String, Object> tmpMap = new HashMap<String, Object>();
             tmpMap.put("expense", BigDecimal.ZERO);
             tmpMap.put("descr", getDBProp("WareHouseCost"));
-            tmpMap.put("summarize", false);
+            tmpMap.put("summary", true);
             for (int i = 0; i < this.products.size(); i++) {
                 tmpMap.put("product" + i, BigDecimal.ZERO);
             }
             for (final Map<String, ?> map : dsList) {
-                if (!map.containsKey("summarize")) {
+                if (!(Boolean) map.get("summary")) {
                     tmpMap.put("expense", ((BigDecimal) tmpMap.get("expense")).add((BigDecimal) map.get("expense")));
                     for (int i = 0; i < this.products.size(); i++) {
                         tmpMap.put("product" + i, ((BigDecimal) tmpMap.get("product" + i)).add((BigDecimal) map
@@ -359,13 +368,14 @@ public abstract class CostCalculation_Base
             final Map<String, Object> tmpMap2 = new HashMap<String, Object>();
             tmpMap2.put("expense", BigDecimal.ZERO);
             tmpMap2.put("descr", getDBProp("WareHouseCostPerUnit"));
-
+            tmpMap2.put("summary", true);
             int i = 0;
             for (final Product product : this.products) {
                 final BigDecimal productUnitTotal = (BigDecimal) tmpMap.get("product" + i);
                 tmpMap2.put("product" + i,
-                                productUnitTotal.setScale(12).divide(product.getQuantity(), BigDecimal.ROUND_HALF_UP)
-                                                .setScale(2));
+                                productUnitTotal.setScale(12, BigDecimal.ROUND_HALF_DOWN)
+                                .divide(product.getQuantity(), BigDecimal.ROUND_HALF_DOWN)
+                                                .setScale(2, BigDecimal.ROUND_HALF_DOWN));
                 i++;
             }
             dsList.add(tmpMap2);
@@ -378,19 +388,42 @@ public abstract class CostCalculation_Base
                                           final JasperReportBuilder _builder)
             throws EFapsException
         {
+            final ConditionalStyleBuilder condition1 = DynamicReports.stl.conditionalStyle(new IsSumExpression())
+                            .setBold(true);
+            final StyleBuilder stBldr;
+            switch (getExType()) {
+                case PDF:
+                    stBldr = getColumnStyle4Pdf(_parameter);
+                    break;
+                case EXCEL:
+                    stBldr = getColumnStyle4Excel(_parameter);
+                    break;
+                case HTML:
+                    stBldr = getColumnStyle4Html(_parameter);
+                    break;
+                default:
+                    stBldr = DynamicReports.stl.style();
+                    break;
+            }
+            stBldr.conditionalStyles(condition1);
 
             final TextColumnBuilder<String> descrColumn = DynamicReports.col.column(getDBProp("Column.descr"), "descr",
                             DynamicReports.type.stringType());
             descrColumn.setWidth(200);
-
+            descrColumn.setStyle(stBldr);
             final TextColumnBuilder<BigDecimal> expenseColumn = DynamicReports.col.column(getDBProp("Column.expense"),
                             "expense", DynamicReports.type.bigDecimalType());
+            expenseColumn.setStyle(stBldr);
+            final VariableBuilder<Boolean> summary = DynamicReports.variable("summary", Boolean.class,
+                            Calculation.NOTHING);
+            _builder.addVariable(summary);
 
             _builder.addColumn(descrColumn, expenseColumn);
             int i = 0;
             for (final Product product : this.products) {
                 final TextColumnBuilder<BigDecimal> prodColumn = DynamicReports.col.column(product.getLabel(),
                                 "product" + i, DynamicReports.type.bigDecimalType());
+                prodColumn.setStyle(stBldr);
                 _builder.addColumn(prodColumn);
                 i++;
             }
@@ -427,7 +460,8 @@ public abstract class CostCalculation_Base
         public BigDecimal getPartial(final BigDecimal _expense,
                                      final BigDecimal _productTotal)
         {
-            BigDecimal ret = _expense.setScale(12).divide(_productTotal, BigDecimal.ROUND_HALF_DOWN).multiply(this.cost);
+            BigDecimal ret = _expense.setScale(12, BigDecimal.ROUND_HALF_DOWN)
+                            .divide(_productTotal, BigDecimal.ROUND_HALF_DOWN).multiply(this.cost);
             ret = ret.setScale(2,  BigDecimal.ROUND_HALF_DOWN);
             return ret;
 
@@ -464,8 +498,6 @@ public abstract class CostCalculation_Base
             this.quantity = this.quantity.add(_quantity);
         }
 
-
-
         /**
          * Getter method for the instance variable {@link #quantity}.
          *
@@ -475,7 +507,18 @@ public abstract class CostCalculation_Base
         {
             return this.quantity.compareTo(BigDecimal.ZERO) == 0 ? BigDecimal.ONE : this.quantity;
         }
+    }
 
+    public static class IsSumExpression
+        extends AbstractSimpleExpression<Boolean>
+    {
+        private static final long serialVersionUID = 1L;
 
+        @Override
+        public Boolean evaluate(final ReportParameters _reportParameters)
+        {
+            final Boolean summarize = _reportParameters.getFieldValue("summary");
+            return summarize;
+        }
     }
 }
