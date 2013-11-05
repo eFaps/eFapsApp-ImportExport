@@ -45,9 +45,33 @@ import org.efaps.util.EFapsException;
 public abstract class Import_Base
 {
 
+    /**
+     * Enum for Incoterm-Codes 2010.
+     */
     public enum TERM
     {
-        EXW, FCA, FOB, CFR, CIF, CPT, DDU, DDP;
+        /** EX Works. */
+        EXW,
+        /** Free CArrier. */
+        FCA,
+        /**  Free Alongside Ship. */
+        FAS,
+        /** Free On Board. */
+        FOB,
+        /**  Cost And FReight. */
+        CFR,
+        /** Cost Insurance Freight. */
+        CIF,
+        /** Delivered At Terminal. */
+        DAT,
+        /**  Delivered At Place. */
+        DAP,
+        /** Carriage Paid To. */
+        CPT,
+        /** Carriage Insurance Paid. */
+        CIP,
+        /** Delivered Duty Paid. */
+        DDP;
     }
 
 
