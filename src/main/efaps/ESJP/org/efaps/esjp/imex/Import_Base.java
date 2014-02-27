@@ -28,9 +28,13 @@ import org.efaps.admin.event.Parameter;
 import org.efaps.admin.event.Return;
 import org.efaps.admin.program.esjp.EFapsRevision;
 import org.efaps.admin.program.esjp.EFapsUUID;
+import org.efaps.db.AttributeQuery;
 import org.efaps.db.Insert;
+import org.efaps.db.QueryBuilder;
 import org.efaps.esjp.ci.CIImEx;
+import org.efaps.esjp.ci.CISales;
 import org.efaps.esjp.common.uiform.Create;
+import org.efaps.esjp.common.uitable.MultiPrint;
 import org.efaps.util.EFapsException;
 
 
@@ -93,5 +97,39 @@ public abstract class Import_Base
             }
         };
         return create.execute(_parameter);
+    }
+
+
+    public Return documentMultiPrint(final Parameter _parameter)
+        throws EFapsException
+    {
+        final MultiPrint multi = new MultiPrint()
+        {
+
+            @Override
+            protected void add2QueryBldr(final Parameter _parameter,
+                                         final QueryBuilder _queryBldr)
+                throws EFapsException
+            {
+                final QueryBuilder ooAttrQueryBldr = new QueryBuilder(CIImEx.Import2OrderOutbound);
+                final AttributeQuery ooAttrQuery = ooAttrQueryBldr
+                                .getAttributeQuery(CIImEx.Import2OrderOutbound.ToLink);
+
+                final QueryBuilder docAttrQueryBldr = new QueryBuilder(CISales.Document2DocumentAbstract);
+                docAttrQueryBldr.addWhereAttrInQuery(CISales.Document2DocumentAbstract.FromAbstractLink, ooAttrQuery);
+                final AttributeQuery docAttrQuery = docAttrQueryBldr
+                                .getAttributeQuery(CISales.Document2DocumentAbstract.ToAbstractLink);
+
+                final QueryBuilder connAttrQueryBldr = new QueryBuilder(CIImEx.ImportExport2DocumentAbstract);
+                connAttrQueryBldr.addWhereAttrEqValue(CIImEx.ImportExport2DocumentAbstract.FromLinkAbstract,
+                                _parameter.getInstance());
+                final AttributeQuery connAttrQuery = connAttrQueryBldr
+                                .getAttributeQuery(CIImEx.ImportExport2DocumentAbstract.ToLinkAbstract);
+
+                _queryBldr.addWhereAttrInQuery(CISales.DocumentAbstract.ID, docAttrQuery);
+                _queryBldr.addWhereAttrNotInQuery(CISales.DocumentAbstract.ID, connAttrQuery);
+            }
+        };
+        return multi.execute(_parameter);
     }
 }

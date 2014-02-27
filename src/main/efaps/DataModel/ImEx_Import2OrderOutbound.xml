@@ -32,7 +32,6 @@
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_Import2OrderOutbound</name>
         <parent>ImEx_ImportExport2DocumentAbstract</parent>
-        <purpose abstract="true" />
         <attribute>
             <name>FromLink</name>
             <type>Link</type>

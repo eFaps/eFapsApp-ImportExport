@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
 
  Copyright 2003 - 2013 The eFaps Team
 
@@ -19,17 +20,17 @@
  Last Changed:    $Date: 2013-09-26 17:40:52 -0500 (jue, 26 sep 2013) $
  Last Changed By: $Author: jan@moxter.net $
 
---><datamodel-type xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+-->
+<datamodel-type xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
     <uuid>ecbf0bda-0327-4391-9d68-b17a3a338165</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
     <file-revision>$Rev: 10321 $</file-revision>
-    <specification/>
-
+    <specification />
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_Import2CustomDuties</name>
         <parent>ImEx_ImportExport2DocumentAbstract</parent>
-        <purpose abstract="true"/>
         <attribute>
             <name>FromLink</name>
             <type>Link</type>

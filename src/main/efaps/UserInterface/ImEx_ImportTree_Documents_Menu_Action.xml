@@ -31,6 +31,7 @@
         <!-- childs -->
         <childs>
             <child>ImEx_ImportTree_Documents_Menu_Action_AddExisting</child>
+            <child>ImEx_ImportTree_Documents_Menu_Action_AddExistingFromList</child>
             <child>ImEx_ImportTree_Documents_Menu_Action_Disconnect</child>
         </childs>
     </definition>
