@@ -28,24 +28,24 @@ import org.efaps.admin.program.esjp.EFapsUUID;
 import org.efaps.db.Insert;
 import org.efaps.esjp.ci.CIFormImEx;
 import org.efaps.esjp.ci.CIImEx;
-import org.efaps.esjp.sales.document.AbstractSumDocument;
+import org.efaps.esjp.sales.document.AbstractDocumentSum;
 import org.efaps.util.EFapsException;
 
 /**
  * TODO comment!
- * 
+ *
  * @author The eFaps Team
  * @version $Id: Import_Base.java 10301 2013-09-24 21:23:03Z jan@moxter.net $
  */
 @EFapsUUID("be9290b7-4ab4-42b6-9db2-8ab4530ada2e")
 @EFapsRevision("$Rev: 1010 $")
 public abstract class CustomsDuties_Base
-    extends AbstractSumDocument
+    extends AbstractDocumentSum
 {
 
     /**
      * Method for create a new Quotation.
-     * 
+     *
      * @param _parameter Parameter as passed from eFaps API.
      * @return new Return.
      * @throws EFapsException on error.
