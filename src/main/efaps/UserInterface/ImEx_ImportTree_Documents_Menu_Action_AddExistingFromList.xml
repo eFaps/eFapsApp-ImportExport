@@ -40,12 +40,19 @@
                 <property name="ConnectParentAttribute">FromLinkAbstract</property>
                 <property name="ConnectChildAttribute">ToLinkAbstract</property>
                 <property name="AllowMultiple">false</property>
-                <!-- Sales_OrderOutbound, ImEx_Import2OrderOutbound -->
-                <property name="ConnectTypeMap">ae29490a-0751-413e-9c6f-f198eff849fa;8829242f-44e5-4a08-a53a-15d02f96a5db</property>
-                <!-- Sales_IncomingInvoice, ImEx_Import2IncomingInvoice -->
-                <property name="ConnectTypeMap01">491aa65f-cbc8-464c-86bc-ef19ed6302ad;4c2112ea-e1dc-4d8b-9d14-c1c28f6e7988</property>
-                <!-- ImEx_CustomsDuties, ImEx_Import2CustomDuties -->
-                <property name="ConnectTypeMap02">61f42cac-32dd-4591-bb2c-7fac5ef4214a;ecbf0bda-0327-4391-9d68-b17a3a338165</property>
+
+                <!--ImEx_Import2OrderOutbound-->
+                <property name="ConnectType">8829242f-44e5-4a08-a53a-15d02f96a5db</property>
+                <!-- Sales_OrderOutbound-->
+                <property name="ConnectChildType">ae29490a-0751-413e-9c6f-f198eff849fa</property>
+                <!-- ImEx_Import2IncomingInvoice-->
+                <property name="ConnectType01">4c2112ea-e1dc-4d8b-9d14-c1c28f6e7988</property>
+                 <!--Sales_IncomingInvoice -->
+                <property name="ConnectChildType01">491aa65f-cbc8-464c-86bc-ef19ed6302ad</property>
+                <!-- ImEx_Import2CustomDuties-->
+                <property name="ConnectType02">ecbf0bda-0327-4391-9d68-b17a3a338165</property>
+                <!--ImEx_CustomsDuties -->
+                <property name="ConnectChildType02">61f42cac-32dd-4591-bb2c-7fac5ef4214a</property>
             </execute>
         </target>
         <property name="Target">modal</property>
