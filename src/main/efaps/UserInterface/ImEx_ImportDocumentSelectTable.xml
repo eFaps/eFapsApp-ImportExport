@@ -20,7 +20,7 @@
 <ui-table xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
     <uuid>5511ff4c-725f-4fa7-bfb2-7ef143836bfa</uuid>
-    <file-application>eFapsApp-Accounting</file-application>
+    <file-application>eFapsApp-ImportExport</file-application>
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_ImportDocumentSelectTable</name>
