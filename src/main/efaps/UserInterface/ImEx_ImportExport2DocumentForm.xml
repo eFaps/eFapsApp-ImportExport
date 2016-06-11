@@ -24,7 +24,6 @@
     xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
     <uuid>1c2ad03f-fd63-4baa-869d-169e43d66fbf</uuid>
     <file-application>eFapsApp-ImportExport</file-application>
-    <file-revision>$Rev$</file-revision>
     <definition>
         <version-expression>(version==latest)</version-expression>
         <name>ImEx_ImportExport2DocumentForm</name>
@@ -32,12 +31,13 @@
         <field name="term">
             <property name="Attribute">Term</property>
             <property name="ModeEdit">EDITABLE</property>
+            <property name="UIType">SNIPPLET</property>
             <trigger program="org.efaps.esjp.common.uiform.Field"
                 method="getRadioList4Enum"
                 name="ImEx_ImportExport2DocumentForm.term.UI_FIELD_VALUE"
                 event="UI_FIELD_VALUE">
                 <property name="Enum">org.efaps.esjp.imex.Import_Base$TERM</property>
-                <property name="OrderByOrdinal">true</property>   
+                <property name="OrderByOrdinal">true</property>
              </trigger>
         </field>
         <field name="numerator">
