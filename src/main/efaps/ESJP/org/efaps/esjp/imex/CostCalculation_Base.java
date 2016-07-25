@@ -42,7 +42,7 @@ import org.efaps.admin.event.Parameter;
 import org.efaps.admin.event.Parameter.ParameterValues;
 import org.efaps.admin.event.Return;
 import org.efaps.admin.event.Return.ReturnValues;
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 import org.efaps.db.AttributeQuery;
 import org.efaps.db.Instance;
@@ -74,10 +74,10 @@ import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 @EFapsUUID("64cd44c4-608e-48ab-8caf-18fd49867429")
-@EFapsRevision("$Rev$")
+@EFapsApplication("eFapsApp-ImportExport")
 public abstract class CostCalculation_Base
 {
 
@@ -145,7 +145,7 @@ public abstract class CostCalculation_Base
     protected Collection<Product> getProducts(final Parameter _parameter)
         throws EFapsException
     {
-        final Map<Instance, Product> map = new HashMap<Instance,  Product>();
+        final Map<Instance, Product> map = new HashMap<>();
 
         final QueryBuilder attrQueryBldr = new QueryBuilder(CIImEx.Import2IncomingInvoice);
         attrQueryBldr.addWhereAttrEqValue(CIImEx.Import2IncomingInvoice.FromLink, _parameter.getInstance());
@@ -206,7 +206,7 @@ public abstract class CostCalculation_Base
     protected Map<Integer, Set<Doc>> getTermMapping(final Parameter _parameter)
         throws EFapsException
     {
-        final Map<Integer, Set<Doc>> ret = new HashMap<Integer, Set<Doc>>();
+        final Map<Integer, Set<Doc>> ret = new HashMap<>();
         final QueryBuilder queryBldr = new QueryBuilder(CIImEx.ImportExport2DocumentAbstract);
         queryBldr.addWhereAttrEqValue(CIImEx.ImportExport2DocumentAbstract.FromLinkAbstract, _parameter.getInstance());
         final MultiPrintQuery multi = queryBldr.getPrint();
@@ -227,7 +227,7 @@ public abstract class CostCalculation_Base
                 if (ret.containsKey(termId)) {
                     set = ret.get(termId);
                 } else {
-                    set = new HashSet<Doc>();
+                    set = new HashSet<>();
                     ret.put(termId, set);
                 }
                 set.add(new Doc(docInst, multi.<Integer>getAttribute(CIImEx.ImportExport2DocumentAbstract.Numerator),
@@ -257,17 +257,17 @@ public abstract class CostCalculation_Base
                                                     final List<Product> _products)
         throws EFapsException
     {
-        final Collection<Map<String, ?>> dsList = new ArrayList<Map<String, ?>>();
-        final Map<TERM, List<Map<String, Object>>> subListMap = new LinkedHashMap<TERM, List<Map<String, Object>>>();
+        final Collection<Map<String, ?>> dsList = new ArrayList<>();
+        final Map<TERM, List<Map<String, Object>>> subListMap = new LinkedHashMap<>();
         final Map<Integer, Set<Doc>> termMapping = getTermMapping(_parameter);
         for (final TERM term : TERM.values()) {
             final Set<Doc> docInsts = termMapping.get(term.ordinal());
             if (docInsts != null) {
-                final Map<Instance, Doc> docMap = new HashMap<Instance, Doc>();
+                final Map<Instance, Doc> docMap = new HashMap<>();
                 for (final Doc doc : docInsts) {
                     docMap.put(doc.getInstance(), doc);
                 }
-                final List<Map<String, Object>> termList = new ArrayList<Map<String, Object>>();
+                final List<Map<String, Object>> termList = new ArrayList<>();
                 final QueryBuilder queryBldr = new QueryBuilder(CISales.PositionSumAbstract);
                 queryBldr.addWhereAttrEqValue(CISales.PositionSumAbstract.DocumentAbstractLink,
                                 docMap.keySet().toArray());
@@ -279,7 +279,7 @@ public abstract class CostCalculation_Base
                 multi.addSelect(selProdInst, selDocInst);
                 multi.addAttribute(CISales.PositionSumAbstract.NetPrice);
                 multi.execute();
-                final Map<Instance, BigDecimal> costmap = new HashMap<Instance, BigDecimal>();
+                final Map<Instance, BigDecimal> costmap = new HashMap<>();
                 while (multi.next()) {
                     final Instance prodInst = multi.<Instance>getSelect(selProdInst);
                     final Instance docInst = multi.<Instance>getSelect(selDocInst);
@@ -292,7 +292,7 @@ public abstract class CostCalculation_Base
                 }
 
                 // get the product line
-                final Map<String, Object> map = new HashMap<String, Object>();
+                final Map<String, Object> map = new HashMap<>();
                 int i = 0;
                 boolean add = false;
                 BigDecimal prodTotal = BigDecimal.ZERO;
@@ -316,7 +316,7 @@ public abstract class CostCalculation_Base
 
                 for (final Entry<Instance, BigDecimal> entry : costmap.entrySet()) {
                     if (!isProduct(_parameter, entry.getKey())) {
-                        final Map<String, Object> tmpMap = new HashMap<String, Object>();
+                        final Map<String, Object> tmpMap = new HashMap<>();
                         final PrintQuery print = new PrintQuery(entry.getKey());
                         print.addAttribute(CIProducts.ProductAbstract.Name, CIProducts.ProductAbstract.Description);
                         print.execute();
@@ -351,7 +351,7 @@ public abstract class CostCalculation_Base
             }
 
             // summarize up to this line
-            final Map<String, Object> tmpMap = new HashMap<String, Object>();
+            final Map<String, Object> tmpMap = new HashMap<>();
             tmpMap.put("expense", BigDecimal.ZERO);
             tmpMap.put("descr", entry.getKey().toString());
             tmpMap.put("summary", true);
@@ -372,7 +372,7 @@ public abstract class CostCalculation_Base
         }
 
         // summarize over all to get the WareHouseCost
-        final Map<String, Object> tmpMap = new HashMap<String, Object>();
+        final Map<String, Object> tmpMap = new HashMap<>();
         tmpMap.put("expense", BigDecimal.ZERO);
         tmpMap.put("descr", getDBProp("WareHouseCost"));
         tmpMap.put("summary", true);
@@ -391,7 +391,7 @@ public abstract class CostCalculation_Base
         dsList.add(tmpMap);
 
         // get the cost per product
-        final Map<String, Object> tmpMap2 = new HashMap<String, Object>();
+        final Map<String, Object> tmpMap2 = new HashMap<>();
         tmpMap2.put("expense", BigDecimal.ZERO);
         tmpMap2.put("descr", getDBProp("WareHouseCostPerUnit"));
         tmpMap2.put("summary", true);
@@ -427,7 +427,7 @@ public abstract class CostCalculation_Base
         extends AbstractDynamicReport
     {
 
-        private final List<Product> products = new ArrayList<Product>();;
+        private final List<Product> products = new ArrayList<>();;
 
         public CostCalculationReport(final Parameter _parameter) throws EFapsException
         {

@@ -21,17 +21,17 @@
 
 package org.efaps.esjp.imex;
 
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 
 /**
  * TODO comment!
- * 
+ *
  * @author The eFaps Team
  * @version $Id: Import_Base.java 10301 2013-09-24 21:23:03Z jan@moxter.net $
  */
 @EFapsUUID("3fe75294-0f7c-4278-878b-08ec0f9c6cf4")
-@EFapsRevision("$Rev: 1010 $")
+@EFapsApplication("eFapsApp-ImportExport")
 public class CustomsDuties
     extends CustomsDuties_Base
 {

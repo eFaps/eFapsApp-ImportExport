@@ -21,7 +21,7 @@
 
 package org.efaps.esjp.imex.util;
 
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 
 
@@ -29,10 +29,10 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 @EFapsUUID("74b3fe02-1c1f-4dd5-8f9b-91526bce8c3d")
-@EFapsRevision("$Rev$")
+@EFapsApplication("eFapsApp-ImportExport")
 public interface ImExSettings
 {
 

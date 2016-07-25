@@ -2,6 +2,6 @@
  * Util package for ImportExport.
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 package org.efaps.esjp.imex.util;

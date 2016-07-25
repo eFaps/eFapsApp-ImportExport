@@ -23,7 +23,7 @@ package org.efaps.esjp.imex.util;
 import java.util.UUID;
 
 import org.efaps.admin.common.SystemConfiguration;
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 import org.efaps.util.cache.CacheReloadException;
 
@@ -31,10 +31,10 @@ import org.efaps.util.cache.CacheReloadException;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 @EFapsUUID("1809560f-6fb0-4c19-8d95-671e9dd88d0e")
-@EFapsRevision("$Rev$")
+@EFapsApplication("eFapsApp-ImportExport")
 public final class ImEx
 {
     /**

@@ -20,7 +20,7 @@
 
 package org.efaps.esjp.imex;
 
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 
 /**
@@ -29,10 +29,10 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * class.
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 @EFapsUUID("9bb92edc-be94-4e00-80b0-1689e558da31")
-@EFapsRevision("$Rev$")
+@EFapsApplication("eFapsApp-ImportExport")
 public class Import
     extends Import_Base
 {

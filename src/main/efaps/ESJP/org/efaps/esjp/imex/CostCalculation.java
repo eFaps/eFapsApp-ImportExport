@@ -21,7 +21,7 @@
 
 package org.efaps.esjp.imex;
 
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 
 
@@ -31,10 +31,10 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * class.
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 @EFapsUUID("fe055761-ba98-4c32-87bb-0d0bf85f5db0")
-@EFapsRevision("$Rev$")
+@EFapsApplication("eFapsApp-ImportExport")
 public class CostCalculation
     extends CostCalculation_Base
 {

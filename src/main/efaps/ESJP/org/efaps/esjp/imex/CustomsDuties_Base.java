@@ -23,7 +23,7 @@ package org.efaps.esjp.imex;
 
 import org.efaps.admin.event.Parameter;
 import org.efaps.admin.event.Return;
-import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsApplication;
 import org.efaps.admin.program.esjp.EFapsUUID;
 import org.efaps.db.Insert;
 import org.efaps.esjp.ci.CIFormImEx;
@@ -38,7 +38,7 @@ import org.efaps.util.EFapsException;
  * @version $Id: Import_Base.java 10301 2013-09-24 21:23:03Z jan@moxter.net $
  */
 @EFapsUUID("be9290b7-4ab4-42b6-9db2-8ab4530ada2e")
-@EFapsRevision("$Rev: 1010 $")
+@EFapsApplication("eFapsApp-ImportExport")
 public abstract class CustomsDuties_Base
     extends AbstractDocumentSum
 {
@@ -59,9 +59,9 @@ public abstract class CustomsDuties_Base
     }
 
     @Override
-    protected void add2DocCreate(Parameter _parameter,
-                                 Insert _insert,
-                                 CreatedDoc _createdDoc)
+    protected void add2DocCreate(final Parameter _parameter,
+                                 final Insert _insert,
+                                 final CreatedDoc _createdDoc)
         throws EFapsException
     {
         _insert.add(CIImEx.CustomsDuties.AduanasAgency,

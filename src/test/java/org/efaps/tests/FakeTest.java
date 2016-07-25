@@ -26,7 +26,7 @@ package org.efaps.tests;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id$
+ * eFapsApp-Sales
  */
 public class FakeTest
 {
