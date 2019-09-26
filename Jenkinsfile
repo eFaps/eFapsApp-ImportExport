@@ -27,16 +27,5 @@ pipeline {
         }
       }
     }
-    stage('Deploy') {
-      when {
-        branch 'master'
-      }
-      steps {
-        withMaven(maven: 'M3.6', mavenSettingsConfig: 'efaps8', mavenLocalRepo: "$WORKSPACE/../../.m2/${env.BRANCH_NAME}",
-            options: [openTasksPublisher(disabled: true)]) {
-          sh 'mvn deploy -DskipTests'
-        }
-      }
-    }
   }
 }
